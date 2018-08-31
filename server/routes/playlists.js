@@ -15,4 +15,14 @@ router.post('/', (req, res, next ) => {
     }) .catch(next)
 })
 
+router.put('/:id',(req, res, next) => {
+    Playlists.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => res.send({
+        message: 'Success'
+    }))
+    .catch(next)
+})
+
+router.put
+
 module.exports = router
