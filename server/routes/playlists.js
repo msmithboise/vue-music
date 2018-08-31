@@ -8,6 +8,11 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-
+router.post('/', (req, res, next ) => {
+    Playlists.create(req.body)
+    .then(playlist => {
+        res.send(playlist)
+    }) .catch(next)
+})
 
 module.exports = router
