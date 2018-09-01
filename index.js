@@ -14,10 +14,12 @@ server.use(express.static(__dirname + '/../www/'))
 //ROUTES
 let searchRoutes = require('./server/routes/searches')
 let playlistRoutes = require('./server/routes/playlists')
+let songRoutes = require('./server/routes/songs')
 
 
 server.use('/api', searchRoutes)
 server.use('/api/playlists', playlistRoutes)
+server.use('/api/songs' , songRoutes)
 
 
 

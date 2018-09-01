@@ -1,29 +1,29 @@
 let router = require('express').Router()
-let Playlists = require('../models/playlist')
+let Songs = require('../models/song')
 
 //routes.. get post put delete...
 router.get('/', (req, res, next) => {
-    Playlists.find({})
-    .then(playlists => res.send(playlists))
+    Songs.find({})
+    .then(songs => res.send(songs))
     .catch(next)
 })
 
 router.get('/:id', (req, res, next)=>{
-    Playlists.findById(req.params.id)
-    .then(playlist =>{
-        res.send(playlist)
+    Songs.findById(req.params.id)
+    .then(song =>{
+        res.send(song)
     })
 })
 
 router.post('/', (req, res, next ) => {
-    Playlists.create(req.body)
-    .then(playlist => {
-        res.send(playlist)
+    Songs.create(req.body)
+    .then(song => {
+        res.send(song)
     }) .catch(next)
 })
 
 router.put('/:id',(req, res, next) => {
-    Playlists.findByIdAndUpdate(req.params.id, req.body)
+    Songs.findByIdAndUpdate(req.params.id, req.body)
     .then(() => res.send({
         message: 'Success'
     }))
@@ -31,7 +31,7 @@ router.put('/:id',(req, res, next) => {
 })
 
 router.delete('/:id', (req, res, next) => {
-    Playlists.findByIdAndRemove(req.params.id)
+    Songs.findByIdAndRemove(req.params.id)
     .then(() => res.send ({
         message: 'It worked'
     })) .catch(next)
