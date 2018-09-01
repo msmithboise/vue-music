@@ -23,6 +23,13 @@ router.put('/:id',(req, res, next) => {
     .catch(next)
 })
 
+router.delete('/:id', (req, res, next) => {
+    Playlists.findByIdAndRemove(req.params.id)
+    .then(() => res.send ({
+        message: 'It worked'
+    })) .catch(next)
+})  
+
 router.put
 
 module.exports = router
