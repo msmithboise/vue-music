@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import router from './router';
 
 Vue.use(Vuex)
 
@@ -19,15 +18,20 @@ export default new Vuex.Store({
 
   },
   mutations: {
-    
+    setSongs(state, data) {
+      state.songs = data
+    }
   },
   actions: {
-  getSongs({commit, dispatch}) {
-    songApi.get('')
-    .then(res => {
-      commit('setSongs', res.data)
-      console.log(res.data)
-    })
-  }
+    getMusic({commit, dispatch}) {
+      var artist = artist.value;
+      songApi.get('' + artist)
+        .then(res => {
+          
+          commit('setSongs', res.data)
+        })
+    }
   }
 })
+  
+  
