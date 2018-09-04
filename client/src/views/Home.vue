@@ -8,14 +8,19 @@
             <button type="submit" class="btn btn-primary" id="get-music-button">Get Music</button>
            </div>
 
-           <div v-for="song in searchSongs" :key="song">
+           <div v-for="song in searchSongs">
              <img :src="song.artworkUrl100">
              {{song.artistName}}
+             {{song.trackName}}
              {{song.collectionName}}
              {{song.trackPrice}}
              <audio controls>
               <source :src="song.previewUrl" type="audio/mpeg">
               </audio>
+              
+              <div>
+                <button>Add To Playlist</button>
+              </div>
 
 
 
@@ -41,7 +46,7 @@ export default {
     };
   },
 
-
+// dispatch calls actions in the store
   methods: {
     searchByArtist() {
       this.$store.dispatch("getMusicByArtist", this.artist);
