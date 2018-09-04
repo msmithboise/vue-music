@@ -8,7 +8,8 @@
             <button type="submit" class="btn btn-primary" id="get-music-button">Get Music</button>
            </div>
 
-           <div v-for="song in searchSongs">
+           
+           <div v-for="song in searchSongs">  
              <img :src="song.artworkUrl100">
              {{song.artistName}}
              {{song.trackName}}
@@ -19,7 +20,7 @@
               </audio>
               
               <div>
-                <button>Add To Playlist</button>
+                <button @click="addToPlaylist">Add To Playlist</button>
               </div>
 
 
@@ -50,6 +51,11 @@ export default {
   methods: {
     searchByArtist() {
       this.$store.dispatch("getMusicByArtist", this.artist);
+    },
+
+    addToPlaylist() {
+      this.$store.dispatch("addSongs", song)
+      
     }
   },
   // watches for what is in the state.
@@ -57,6 +63,8 @@ export default {
     searchSongs() {
       return this.$store.state.allSongs;
     }
+
+
   }
 };
 </script>
