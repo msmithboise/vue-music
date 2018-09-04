@@ -14,15 +14,15 @@ let songApi =  axios.create({
 
 export default new Vuex.Store({
   state: {
-    songs: [],
-    song: {},
+    allSongs: [],
+    newSong: {},
     playlists: [],
     playlist: {}
 
   },
   mutations: {
-    setSongs(state, songs) {
-      state.songs = songs
+    setSongs(state, song) {
+      state.allSongs = song
     }
   },
   actions: {
@@ -30,8 +30,8 @@ export default new Vuex.Store({
       
       songApi.get(artist)
      
-      .then(data => {
-        commit('setSongs', data.results)
+      .then(res => {
+        commit('setSongs', res.data.results)
       })
     }
   }
