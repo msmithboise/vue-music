@@ -7,9 +7,22 @@
             <input type="text" class="form-control" name="artist" placeholder="Artist Name" v-model="artist"/>
             <button type="submit" class="btn btn-primary" id="get-music-button">Get Music</button>
            </div>
+
+           <div v-for="song in searchSongs" :key="song">
+             <img :src="song.artworkUrl100">
+             {{song.artistName}}
+             {{song.collectionName}}
+             {{song.trackPrice}}
+             <audio controls>
+              <source :src="song.previewUrl" type="audio/mpeg">
+              </audio>
+
+
+
+           </div>
     </form>
     <div id="songs"></div>
-    
+
 
     
             
@@ -28,12 +41,13 @@ export default {
     };
   },
 
+
   methods: {
     searchByArtist() {
       this.$store.dispatch("getMusicByArtist", this.artist);
     }
   },
-
+  // watches for what is in the state.
   computed: {
     searchSongs() {
       return this.$store.state.allSongs;
