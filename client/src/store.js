@@ -7,7 +7,10 @@ Vue.use(Vuex)
 let songApi =  axios.create({
   baseURL: 'https://itunes.apple.com/search?term=',
   timeout: 3000,
+
 })
+
+
 
 export default new Vuex.Store({
   state: {
@@ -18,18 +21,18 @@ export default new Vuex.Store({
 
   },
   mutations: {
-    setSongs(state, data) {
-      state.songs = data
+    setSongs(state, songs) {
+      state.songs = songs
     }
   },
   actions: {
-    getMusic({commit, dispatch}) {
-      var artist = artist.value;
-      songApi.get('' + artist)
-        .then(res => {
-          
-          commit('setSongs', res.data)
-        })
+    getMusicByArtist({ commit, dispatch }, artist){
+      
+      songApi.get(artist)
+     
+      .then(data => {
+        commit('setSongs', data.results)
+      })
     }
   }
 })
