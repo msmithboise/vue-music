@@ -1,6 +1,6 @@
 let express = require('express')
 let bp = require('body-parser')
-require('./server/db/db-config') // is this the right file path?
+require('./db/db-config') // is this the right file path?
 let server = express();
 let port = 3000
 
@@ -12,9 +12,9 @@ server.use(express.static(__dirname + '/../www/'))
 
 
 //ROUTES
-let searchRoutes = require('./server/routes/searches')
-let playlistRoutes = require('./server/routes/playlists')
-let songRoutes = require('./server/routes/songs')
+let searchRoutes = require('./routes/searches')
+let playlistRoutes = require('./routes/playlists')
+let songRoutes = require('./routes/songs')
 
 
 server.use('/api', searchRoutes)

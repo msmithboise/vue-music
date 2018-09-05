@@ -9,7 +9,7 @@
            </div>
 
            
-           <div class="wrapper" v-for="song in searchSongs">  
+           <div class="wrapper" v-for="song in searchSongs" :key="song">  
             
                <img :src="song.artworkUrl100">
             <div>
