@@ -9,7 +9,7 @@
            </div>
 
            
-           <div class="wrapper" v-for="song in searchSongs" :key="song">  
+           <div class="wrapper" v-for="song in searchSongs">  
             
                <img :src="song.artworkUrl100">
             <div>
@@ -38,7 +38,7 @@
               </audio>
               
               <div>
-                <button @click="addToPlaylist">Add To Playlist</button>
+                <button @click="addSongToPlaylist(song)">Add To Playlist</button>
               </div>
 
 
@@ -62,6 +62,7 @@ export default {
   data() {
     return {
       artist: ""
+      
     };
   },
 
@@ -71,7 +72,7 @@ export default {
       this.$store.dispatch("getMusicByArtist", this.artist);
     },
 
-    addToPlaylist() {
+    addSongToPlaylist(song) {
       this.$store.dispatch("addSongs", song)
       
     }
