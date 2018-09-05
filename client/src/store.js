@@ -23,7 +23,7 @@ export default new Vuex.Store({
   state: {
     allSongs: [],
     newSong: {},
-    playlists: [],
+    playlists: {},
     playlist: {}
 
   },
@@ -34,8 +34,11 @@ export default new Vuex.Store({
 
     },
     addNewPlaylist(state, newPlaylist) {
-      state.playlists = newPlaylist
+      Vue.set(state.playlists, newPlaylist._id, newPlaylist)
+      console.log(newPlaylist)
     }
+
+    
   },
 
   // commit calls mutations in store

@@ -8,7 +8,12 @@
             <button type="submit" class="btn btn-primary" id="get-music-button">Get Music</button>
            </div>
 
-           
+           <div v-for="(value, key) in playlists" :key="key">
+
+                <h1>{{value._id}}</h1>
+                  
+           </div>
+
            <div class="wrapper" v-for="song in searchSongs">  
             
                <img :src="song.artworkUrl100">
@@ -39,6 +44,7 @@
               
               <div>
                 <button @click="addSongToPlaylist(song)">Add To Playlist</button>
+
               </div>
 
 
@@ -81,6 +87,10 @@ export default {
   computed: {
     searchSongs() {
       return this.$store.state.allSongs;
+    },
+
+    playlists(){
+      return this.$store.state.playlists;
     }
 
 
