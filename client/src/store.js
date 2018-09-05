@@ -36,6 +36,10 @@ export default new Vuex.Store({
     addNewPlaylist(state, newPlaylist) {
       Vue.set(state.playlists, newPlaylist._id, newPlaylist)
       console.log(newPlaylist)
+    },
+
+    removePlaylist(state, playlistId){
+      Vue.delete(state.playlists, playlistId)
     }
 
     
@@ -67,11 +71,22 @@ export default new Vuex.Store({
           commit('addNewPlaylist', res.data)
 
         })
+    },
+
+    removeSongs({commit, dispatch}, playlistId){
+      playlistApi.delete('/'+ playlistId)
+     .then(res => {
+       commit('removePlaylist', playlistId)
+     })
+      } 
+      
+
     }
+    
   }
 
 
 
-})
+)
 
 

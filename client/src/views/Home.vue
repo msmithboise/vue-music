@@ -19,6 +19,7 @@
              
               </audio>
                 
+                <button @click="removeSongFromPlaylist(value._id)">Remove From Playlist</button>
                   
            </div>
 
@@ -89,6 +90,10 @@ export default {
     addSongToPlaylist(song) {
       this.$store.dispatch("addSongs", song)
       
+    },
+
+    removeSongFromPlaylist(playlistId) {
+      this.$store.dispatch("removeSongs", playlistId)
     }
   },
   // watches for what is in the state.
