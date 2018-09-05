@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+
 Vue.use(Vuex)
 
 let songApi = axios.create({
@@ -13,7 +14,7 @@ let songApi = axios.create({
 })
 
 let playlistApi = axios.create({
-  baseURL: 'localhost:3000/api/songs',
+  baseURL: '//localhost:3000/api/songs',
   timeout: 3000
 })
 
@@ -58,7 +59,7 @@ export default new Vuex.Store({
       }
       playlistApi.post('/',addedSong) // this is where you're sending your board.
         .then(res => {
-          commit('addNewPlaylist')
+          commit('addNewPlaylist', res.data)
 
         })
     }

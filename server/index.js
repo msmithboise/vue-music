@@ -3,12 +3,13 @@ let bp = require('body-parser')
 require('./db/db-config') // is this the right file path?
 let server = express();
 let port = 3000
+let cors = require('cors')
 
 server.use(bp.json())
 server.use(bp.urlencoded(({
   extended: true
 })))
-server.use(express.static(__dirname + '/../www/'))
+server.use(cors())
 
 
 //ROUTES
