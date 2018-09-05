@@ -8,9 +8,6 @@ Vue.use(Vuex)
 let songApi = axios.create({
   baseURL: 'https://itunes.apple.com/search?term=',
   timeout: 3000,
-
-
-
 })
 
 let playlistApi = axios.create({
@@ -22,27 +19,19 @@ let playlistApi = axios.create({
 export default new Vuex.Store({
   state: {
     allSongs: [],
-    newSong: {},
-    playlists: {},
-    playlist: {}
-
+    playlist: []
   },
   // where we perform changes to the state.
   mutations: {
     setSongs(state, song) {
       state.allSongs = song
-
     },
-    addNewPlaylist(state, newPlaylist) {
-      Vue.set(state.playlists, newPlaylist._id, newPlaylist)
-      console.log(newPlaylist)
+    setPlaylist(state, list){
+      state.playlist = list
     },
-
-    removePlaylist(state, playlistId){
-      Vue.delete(state.playlists, playlistId)
+    addToPlaylist(state, song) {
+      state.playlist.push(song)
     }
-
-    
   },
 
   // commit calls mutations in store
@@ -50,13 +39,13 @@ export default new Vuex.Store({
   // actions are responsible for talking to the database
   actions: {
     getMusicByArtist({ commit, dispatch }, artist) {
-
       songApi.get(artist)
         // changed to res because axios adds "data" wrap.  didn't want data.data.results.  a good thing to remember...
         .then(res => {
           commit('setSongs', res.data.results)
         })
-    },                            //where will you send the data?
+    },
+                                //where will you send the data?
     addSongs({ commit, dispatch }, song) {
       let addedSong = {
         artwork: song.artworkUrl100,
@@ -66,24 +55,26 @@ export default new Vuex.Store({
         preview: song.previewUrl,
       }
       console.log(addedSong)
-      playlistApi.post('/',addedSong) // this is where you're sending your board.
+      playlistApi.post('/', addedSong) // this is where you're sending your board.
         .then(res => {
-          commit('addNewPlaylist', res.data)
-
+          commit('addToPlaylist', res.data)
         })
     },
 
-    removeSongs({commit, dispatch}, playlistId){
-      playlistApi.delete('/'+ playlistId)
-     .then(res => {
-       commit('removePlaylist', playlistId)
-     })
-      } 
-      
+    removeSongs({ commit, dispatch }, playlistId) {
+      playlistApi.delete('/' + playlistId)
+        .then(res => {
+          dispatch('getPlaylist')
+        })
+    },
 
+    getPlaylist({commit}){
+      playlistApi.get('').then(res =>{
+        commit('setPlaylist', res.data)
+      })
     }
-    
   }
+}
 
 
 

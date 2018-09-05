@@ -8,23 +8,22 @@
             <button type="submit" class="btn btn-primary" id="get-music-button">Get Music</button>
            </div>
 
-           <div v-for="(value, key) in playlists" :key="key">
+           <div v-for="song in playlist" :key="song._id">
                 
-                <img :src="value.artwork">
-                <p>{{value.artist}}</p>
-                <p>{{value.title}}</p>
-                <p>{{value.album}}</p>
+                <img :src="song.artwork">
+                <p>{{song.artist}}</p>
+                <p>{{song.title}}</p>
+                <p>{{song.album}}</p>
 
-               <audio controls :src="value.preview">
+               <audio controls :src="song.preview">
              
               </audio>
                 
-                <button @click="removeSongFromPlaylist(value._id)">Remove From Playlist</button>
+                <button @click="removeSongFromPlaylist(song._id)">Remove From Playlist</button>
                   
            </div>
 
-           <div class="wrapper" v-for="song in searchSongs">  
-            
+           <div class="wrapper" v-for="song in searchSongs" :key="song.trackId">  
                <img :src="song.artworkUrl100">
             <div>
              <p>{{song.artistName}}</p>  
@@ -77,10 +76,11 @@ export default {
   data() {
     return {
       artist: ""
-      
     };
   },
-
+  mounted(){
+    this.$store.dispatch('getPlaylist')
+  },
 // dispatch calls actions in the store
   methods: {
     searchByArtist() {
@@ -102,8 +102,8 @@ export default {
       return this.$store.state.allSongs;
     },
 
-    playlists(){
-      return this.$store.state.playlists;
+    playlist(){
+      return this.$store.state.playlist;
     }
 
 
