@@ -11,6 +11,12 @@ let schema = new Schema({
     },
     album: {
         type: String
+    },
+    artwork: {
+        type: String
+    },
+    preview: {
+        type: String
     }
 })
 

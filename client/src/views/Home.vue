@@ -9,8 +9,16 @@
            </div>
 
            <div v-for="(value, key) in playlists" :key="key">
+                
+                <img :src="value.artwork">
+                <p>{{value.artist}}</p>
+                <p>{{value.title}}</p>
+                <p>{{value.album}}</p>
 
-                <h1>{{value._id}}</h1>
+               <audio controls :src="value.preview">
+             
+              </audio>
+                
                   
            </div>
 

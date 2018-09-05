@@ -55,11 +55,13 @@ export default new Vuex.Store({
     },                            //where will you send the data?
     addSongs({ commit, dispatch }, song) {
       let addedSong = {
-        title: song.TrackName,
+        artwork: song.artworkUrl100,
+        title: song.trackName,
         artist: song.artistName,
         album: song.collectionName,
-        preview: song.previewUrl
+        preview: song.previewUrl,
       }
+      console.log(addedSong)
       playlistApi.post('/',addedSong) // this is where you're sending your board.
         .then(res => {
           commit('addNewPlaylist', res.data)
