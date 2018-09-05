@@ -49,22 +49,22 @@ export default new Vuex.Store({
         commit('setSongs', res.data.results)
       })
     },                            //where will you send the data?
-    addSongs({ commit, dispatch}, song) {
-    let addedSong = {
-      title: song.TrackName,
-      artist: song.artistName,
-      album: song.collectionName,
-      preview: song.previewUrl
-    }
-     playlistApi.post('/', addedSong) // this is where you're sending your board.
-    .then(res => { 
-      commit('addNewPlaylist')
+    // addSongs({ commit, dispatch}, song) {
+    // let addedSong = {
+    //   title: song.TrackName,
+    //   artist: song.artistName,
+    //   album: song.collectionName,
+    //   preview: song.previewUrl
+    // }
+    //  playlistApi.post('/', addedSong) // this is where you're sending your board.
+    // .then(res => { 
+    //   commit('addNewPlaylist')
       
-    })
+    // })
     }
 
 
-  }
+  
 })
   
   
